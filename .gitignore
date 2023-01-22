@@ -1,0 +1,2 @@
+# name of the files which we don't want to push
+.env
