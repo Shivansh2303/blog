@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from article.views import ArticleListCreateAPIView,ArticleDetailUpdateDeleteAPIView
-from user.views import VerifyEmail ,UserCreateAPIView,UserLoginAPIView
+from user.views import *
 
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
@@ -29,5 +29,9 @@ urlpatterns = [
     path('register/',UserCreateAPIView.as_view(),name='user-create'),
     path('user-verify/',VerifyEmail.as_view(),name='verify-email'),
     path('login/',UserLoginAPIView.as_view(),name='user-login'),
+    path('request-reset-email/',RequestPasswordResetEmail.as_view(), name='request-reset-email'),
+    path('password-reset/<uidb64>/<token>/',PasswordTokenCheckAPIView.as_view(),name='password-reset'),
+    path('password-reset-complete/',SetNewPasswordAPIView.as_view(),name='password-reset-complete'),
+    path('user-profile/<int:pk>/',UserDetailDestroyAPIView().as_view(),name='user-detail'),
 
 ]
